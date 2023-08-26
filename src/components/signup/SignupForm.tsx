@@ -23,7 +23,8 @@ function SignupForm() {
             onSubmit={handleSubmit(async (data) => {
                 try {
                     const response = await fetch(
-                        "http://localhost:3001/auth/signup",
+                        //change to env variable
+                        `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,
                         {
                             method: "POST",
                             body: JSON.stringify(data),

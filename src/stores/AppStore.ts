@@ -96,7 +96,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
             (await (get().user as User).getIdToken(/* forceRefresh */ true)) ||
             null;
 
-        const socket = io("http://localhost:3001", {
+        const socket = io(process.env.NEXT_PUBLIC_API_URL as string, {
             auth: {
                 token,
             },
@@ -116,7 +116,6 @@ export const useAppStore = create<AppStore>((set, get) => ({
         });
 
         socket.on(`message:${(get().user as User).uid}`, (message: Message) => {
-
             // Check new message room in roomList
             const room = get().roomList.find(
                 (room) => room.id === message.roomId

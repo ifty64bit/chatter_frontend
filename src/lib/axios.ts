@@ -3,7 +3,7 @@ import axios from "axios";
 import type { User } from "firebase/auth";
 
 const httpClient = axios.create({
-    baseURL: "http://localhost:3001",
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 httpClient.interceptors.request.use(async (config) => {
