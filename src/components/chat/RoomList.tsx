@@ -57,7 +57,7 @@ function RoomList() {
                         alt="user-male-circle"
                         className="rounded-full"
                     />
-                    <span className="hidden md:inline-block">
+                    <span className="inline-block">
                         {room.participants[0].user.username}
                     </span>
                 </div>
