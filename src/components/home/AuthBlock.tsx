@@ -14,10 +14,12 @@ import Link from "next/link";
 import { addOauthUser } from "@/apis/user";
 
 function AuthBlock() {
+    const [loading, setLoading] = React.useState(false); //change to loading state
     const router = useRouter();
     const setUser = useAppStore((state) => state.setUser);
 
     async function signInWithGoogle() {
+        setLoading(true);
         const provider = new GoogleAuthProvider();
         try {
             const result = await signInWithPopup(auth, provider);
@@ -34,8 +36,10 @@ function AuthBlock() {
             } else {
                 console.log("Existing user!");
             }
+            setLoading(false);
             router.push("/chat");
         } catch (error: any) {
+            setLoading(false);
             const errorCode = error.code;
             const errorMessage = error.message;
             const email = error.email;

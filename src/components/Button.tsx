@@ -1,6 +1,7 @@
+"use client";
 import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { type } from "os";
+import Image from "next/image";
 
 interface ButtonProps
     extends React.HTMLAttributes<HTMLButtonElement>,
@@ -16,6 +17,7 @@ interface ButtonProps
     fullWidth?: boolean;
     disabled?: boolean;
     type?: "button" | "submit" | "reset";
+    loading?: boolean;
 }
 
 const buttonVariants = cva(
@@ -56,6 +58,7 @@ function Button({
     onClick,
     type,
     className,
+    loading,
 }: ButtonProps) {
     return (
         <button
@@ -68,6 +71,13 @@ function Button({
             onClick={onClick}
         >
             {children}
+            <Image
+                width="20"
+                height="20"
+                src="https://img.icons8.com/fluency-systems-filled/48/spinner-frame-6.png"
+                alt="spinner-frame-6"
+                className={`animate-spin ${loading ? "block" : "hidden"}`}
+            />
         </button>
     );
 }

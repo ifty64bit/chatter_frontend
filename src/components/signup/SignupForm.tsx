@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import Input from "../Input";
@@ -8,6 +8,7 @@ import Button from "../Button";
 import { SignupType, signupSchema } from "@/lib/schemas";
 
 function SignupForm() {
+    const [loading, setLoading] = React.useState(false); //change to loading state
     const router = useRouter();
     const {
         register,
@@ -22,7 +23,8 @@ function SignupForm() {
             className="space-y-4 max-w-sm md:max-w-lg p-4 border rounded-md shadow-lg"
             onSubmit={handleSubmit(async (data) => {
                 try {
-                    const response = await fetch(
+                    setLoading(true);
+                    await fetch(
                         //change to env variable
                         `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,
                         {
@@ -33,9 +35,10 @@ function SignupForm() {
                             },
                         }
                     );
-                    // console.log(await response.json());
+                    setLoading(false);
                     router.push("/login");
                 } catch (error) {
+                    setLoading(false);
                     console.error(error);
                 }
             })}
@@ -62,7 +65,7 @@ function SignupForm() {
                     register={register("confirmPassword")}
                 />
             </div>
-            <Button type="submit" fullWidth>
+            <Button type="submit" fullWidth loading={loading}>
                 Sign up
             </Button>
         </form>
