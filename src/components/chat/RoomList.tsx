@@ -33,12 +33,12 @@ function RoomList() {
 
     if (roomList.length === 0)
         return (
-            <div className="space-y-4 p-1 md:p-4">
+            <div className="space-y-4 p-1 md:p-4 flex-auto">
                 <p>Search user to start Conversation.</p>
             </div>
         );
     return (
-        <div className="space-y-4 p-1 md:p-4">
+        <div className="space-y-4 p-1 md:p-4 flex-auto">
             {roomList.map((room, i) => (
                 <div
                     key={i}

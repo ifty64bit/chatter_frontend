@@ -23,3 +23,22 @@ export interface createdRoomResponse {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface Message {
+    id: number;
+    text: string;
+    userId: string;
+    roomId: number;
+    createdAt: string;
+    updatedAt: string;
+    user: {
+        id: string;
+        username: string;
+        email: string;
+        name: string | null;
+        avatar: string | null;
+        roomId: string | null;
+        createdAt: string;
+        updatedAt: string;
+    };
+}

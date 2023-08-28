@@ -5,30 +5,13 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { type Socket, io } from "socket.io-client";
 import { queryClient } from "@/components/providers/DefaultProviderWrapper";
+import { Message } from "@/lib/types";
 
 const googleProvider = new GoogleAuthProvider();
 
-interface Message {
-    id: number;
-    text: string;
-    userId: string;
-    roomId: number;
-    createdAt: string;
-    updatedAt: string;
-    user: {
-        id: string;
-        username: string;
-        email: string;
-        name: string | null;
-        avatar: string | null;
-        roomId: string | null;
-        createdAt: string;
-        updatedAt: string;
-    };
-}
-
 interface AppStore {
     user: null | User | "loading";
+    userName: string | null;
     socket: Socket | null;
     roomList: Array<any>;
     currentRoom: {
@@ -47,6 +30,7 @@ interface AppStore {
 
 export const useAppStore = create<AppStore>((set, get) => ({
     user: "loading",
+    userName: null,
     socket: null,
     //We could move roomlist to react query
     roomList: [],

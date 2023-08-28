@@ -35,3 +35,12 @@ export const addOauthUser = async (
         return error;
     }
 };
+
+export const getUser = async (id: string) => {
+    try {
+        const { data } = await httpClient.get(`/users/${id}`);
+        return data;
+    } catch (error: any) {
+        return error;
+    }
+};

@@ -21,5 +21,12 @@ export const loginSchema = z.object({
     password: z.string().min(5).max(100),
 });
 
+export const profileSchema = z.object({
+    name: z.string().min(3).max(100).optional(),
+    photo: z.string().url().optional(),
+    username: z.string().min(3).max(100).optional(),
+});
+
 export type SignupType = z.infer<typeof signupSchema>;
 export type LoginType = z.infer<typeof loginSchema>;
+export type ProfileType = z.infer<typeof profileSchema>;
