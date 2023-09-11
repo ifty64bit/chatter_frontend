@@ -10,11 +10,14 @@ function SearchModule() {
     const [searchInput, setSearchInput] = useState("");
     const [userList, setUserList] = useState<Array<User>>([]);
     const addRoom = useAppStore((state) => state.addRoom);
-    const [roomList, setRoomList, setCurrentRoom] = useAppStore((state) => [
-        state.roomList,
-        state.setRoomList,
-        state.setCurrentRoom,
-    ]);
+    const [roomList, setRoomList, setCurrentRoom, setSidebarOpen] = useAppStore(
+        (state) => [
+            state.roomList,
+            state.setRoomList,
+            state.setCurrentRoom,
+            state.setSidebarOpen,
+        ]
+    );
 
     //debounse with timeout
     useEffect(() => {
@@ -44,6 +47,7 @@ function SearchModule() {
                 id: result.data.id,
                 name: result.data.participants[0].user.username,
             });
+            setSidebarOpen(false);
             return;
         }
         setCurrentRoom({
@@ -51,6 +55,7 @@ function SearchModule() {
             name: result.data.participants[0].user.username,
         });
         addRoom(result.data);
+        setSidebarOpen(false);
         setSearchInput("");
     }
 

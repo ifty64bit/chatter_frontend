@@ -18,6 +18,7 @@ interface AppStore {
         id: number;
         name: string;
     } | null;
+    isSidebarOpen: boolean;
     setCurrentRoom: (room: { id: number; name: string }) => void;
     setUser: (user: null | User) => void;
     setRoomList: (rooms: any) => void;
@@ -26,6 +27,7 @@ interface AppStore {
     initFirebaseAuth: () => void;
     signinWithGoogle: () => void;
     initializeSocket: () => void;
+    setSidebarOpen: (isOpen?: boolean) => void;
 }
 
 export const useAppStore = create<AppStore>((set, get) => ({
@@ -35,6 +37,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
     //We could move roomlist to react query
     roomList: [],
     currentRoom: null,
+    isSidebarOpen: false,
     setCurrentRoom: (room: { id: number; name: string }) =>
         set({ currentRoom: { ...room } }),
     setRoomList: (rooms) => set({ roomList: [...rooms] }),
@@ -144,5 +147,12 @@ export const useAppStore = create<AppStore>((set, get) => ({
         });
 
         set({ socket });
+    },
+    setSidebarOpen(state) {
+        if (state) {
+            return set({ isSidebarOpen: state });
+        } else {
+            set({ isSidebarOpen: !get().isSidebarOpen });
+        }
     },
 }));

@@ -8,7 +8,7 @@ interface MessageBlockProps {
 function MessageBlock({ self, text }: MessageBlockProps) {
     return (
         <p
-            className={`max-w-sm px-4 py-2  rounded-3xl ${
+            className={`max-w-xs md:max-w-sm px-4 py-2 rounded-3xl ${
                 self
                     ? "self-end bg-secondaryLight"
                     : "self-start bg-primaryLight"

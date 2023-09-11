@@ -6,14 +6,14 @@ import Image from "next/image";
 import { useEffect } from "react";
 
 function RoomList() {
-    const [roomList, setRoomList, currentRoom, setCurrentRoom] = useAppStore(
-        (state) => [
+    const [roomList, setRoomList, currentRoom, setCurrentRoom, setSidebarOpen] =
+        useAppStore((state) => [
             state.roomList,
             state.setRoomList,
             state.currentRoom,
             state.setCurrentRoom,
-        ]
-    );
+            state.setSidebarOpen,
+        ]);
 
     const fetchMessage = useMessageQuery();
 
@@ -43,12 +43,13 @@ function RoomList() {
                 <div
                     key={i}
                     className="flex gap-4 items-center hover:bg-zinc-200 rounded-lg p-2 cursor-pointer"
-                    onClick={() =>
+                    onClick={() => {
                         setCurrentRoom({
                             id: room.id,
                             name: room.participants[0].user.username,
-                        })
-                    }
+                        });
+                        setSidebarOpen(false);
+                    }}
                 >
                     <Image
                         width={40}
