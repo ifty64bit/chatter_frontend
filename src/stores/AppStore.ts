@@ -80,7 +80,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
         // console.log("Initializing socket");
 
         const token =
-            (await (get().user as User).getIdToken(/* forceRefresh */ true)) ||
+            (await (get().user as User).getIdToken( true)) ||
             null;
 
         const socket = io(process.env.NEXT_PUBLIC_API_URL as string, {

@@ -13,9 +13,11 @@ export default async function RootLayout({
 }) {
     return (
         <ProtectedRouteProvider>
-            <body className="grid md:grid-cols-[250px_1fr] grid-rows-[4rem_auto] md:gap-4 h-screen">
+            <body>
                 <Header />
-                {children}
+                <main className="max-h-screen overflow-hidden grid md:grid-cols-[250px_auto] relative">
+                    {children}
+                </main>
             </body>
         </ProtectedRouteProvider>
     );

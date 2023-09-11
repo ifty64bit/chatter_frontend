@@ -1,23 +1,24 @@
 "use client";
-import React from "react";
-import MessageBlock from "@/components/chat/MessageBlock";
-import Image from "next/image";
 import useMessageQuery from "@/app/hooks/useMessageQuery";
 import { useAppStore } from "@/stores/AppStore";
-import { User } from "firebase/auth";
+import type { User } from "firebase/auth";
+import { useEffect, useRef, useState } from "react";
+import MessageBlock from "./MessageBlock";
+import Image from "next/image";
 
-function MessageView() {
+function Messages() {
     const messages = useMessageQuery();
-    const [textInput, setTextInput] = React.useState("");
-    const messagesEndRef = React.useRef<HTMLDivElement>(null);
+    const [textInput, setTextInput] = useState("");
+    const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const currentUser = useAppStore((state) => state.user) as User;
-    const [socket, currentRoom] = useAppStore((state) => [
+    const [socket, currentRoom, setSidebarOpen] = useAppStore((state) => [
         state.socket,
         state.currentRoom,
+        state.setSidebarOpen,
     ]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.lastElementChild?.scrollIntoView({
                 behavior: "smooth",
@@ -37,22 +38,22 @@ function MessageView() {
     }
     if (currentRoom === null)
         return (
-            <section className="flex flex-col justify-center items-center shadow-lg p-4">
-                <div className="py-2">
-                    <h3 className="font-semibold text-xl text-secondaryLight">
-                        Select a room to start chatting
-                    </h3>
-                </div>
+            <section className="fixed w-full bottom-0 top-20 bg-white flex justify-center items-center">
+                <h3 className="font-semibold text-xl text-secondaryLight">
+                    Select a room to start chatting
+                </h3>
             </section>
         );
+
     return (
-        <section className="flex flex-col justify-between shadow-lg p-4 relative overflow-auto">
-            <div className="border-b py-2">
+        <section className="h-full pt-20">
+            {/* Room Name */}
+            <div id="room_name" className="border-b p-4 fixed w-full bg-white">
                 <h3 className="font-semibold text-xl">{currentRoom?.name}</h3>
             </div>
 
             <div
-                className="flex flex-col gap-4 mt-4 overflow-auto"
+                className="flex flex-col gap-4 mt-4 px-4 overflow-y-scroll h-[calc(100vh-10rem)] max-h-full"
                 ref={messagesEndRef}
             >
                 {messages.isFetched === true && currentRoom !== null
@@ -99,4 +100,4 @@ function MessageView() {
     );
 }
 
-export default MessageView;
+export default Messages;

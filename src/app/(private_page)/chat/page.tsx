@@ -1,11 +1,13 @@
 import Sidebar from "@/components/chat/Sidebar";
-import MessageView from "@/components/chat/MessageView";
+import SidebarToggle from "@/components/chat/SidebarToggle";
+import Messages from "@/components/chat/Messages";
 
 function Page() {
     return (
         <>
             <Sidebar />
-            <MessageView />
+            <Messages />
+            <SidebarToggle/>
         </>
     );
 }

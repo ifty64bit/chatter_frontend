@@ -48,6 +48,7 @@ function SearchModule() {
                 name: result.data.participants[0].user.username,
             });
             setSidebarOpen(false);
+            setSearchInput("");
             return;
         }
         setCurrentRoom({
