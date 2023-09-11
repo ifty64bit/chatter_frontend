@@ -21,9 +21,12 @@ function DialogBox({
     return (
         <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
             <Dialog.Portal className="">
-                <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-30" />
-                <Dialog.Content className="absolute bg-white min-w-[280px] max-w-lg left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-4 rounded-lg">
-                    <div id="title" className="py-2 mb-4 border-b font-semibold">
+                <Dialog.Overlay className="fixed z-20 inset-0 bg-black bg-opacity-30" />
+                <Dialog.Content className="absolute bg-white min-w-[280px] max-w-lg left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-4 rounded-lg z-50">
+                    <div
+                        id="title"
+                        className="py-2 mb-4 border-b font-semibold"
+                    >
                         {title}
                     </div>
 

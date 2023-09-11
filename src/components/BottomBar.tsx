@@ -12,7 +12,7 @@ function BottomBar() {
     const user = useGetUserInfoQuery({ id: currentUser?.uid! });
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className="flex flex-col md:flex-row justify-between items-center gap-1 px-2 py-4 rounded-lg border-t shadow-[0px_-5px_10px_1px_rgba(0,0,0,0.1)]">
+        <div className="flex flex-col md:flex-row items-center gap-2 px-2 py-4 rounded-lg border-t shadow-[0px_-5px_10px_1px_rgba(0,0,0,0.1)]">
             <Image
                 src={
                     currentUser.photoURL ||
@@ -30,14 +30,14 @@ function BottomBar() {
             >
                 {user.data?.data.username || "Loading..."}
             </p>
-            <Image
+            {/* <Image
                 width="35"
                 height="35"
                 src="https://img.icons8.com/fluency-systems-regular/48/settings--v1.png"
                 alt="settings--v1"
                 className="p-1 cursor-pointer hover:shadow-lg rounded-full hover:bg-slate-200"
                 onClick={() => setIsOpen(true)}
-            />
+            /> */}
             <DialogBox
                 title="Profile Setting"
                 isOpen={isOpen}

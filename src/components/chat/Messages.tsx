@@ -85,7 +85,7 @@ function Messages() {
                     />
                     <button
                         type="submit"
-                        className="p-2 border rounded-full hover:bg-primaryDark"
+                        className="p-2 border rounded-full hover:bg-slate-400"
                     >
                         <Image
                             width="30"
